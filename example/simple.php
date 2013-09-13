@@ -21,12 +21,12 @@ class Annotation
 }
 
 /**
- * @Annot(place="class')
+ * @Annot(place="class",)
  */
 class ToCheck
 {
     /**
-     * @Annot(place="property")
+     * @Annot(place="property", again=true, test=null, nope=false)
      */
     public $prop;
 
@@ -99,5 +99,12 @@ echo '--', PHP_EOL, PHP_EOL;
 
 echo 'Reading function', PHP_EOL;
 foreach ($reader->readFunction('a_function') as $a) {
+    echo $a, PHP_EOL;
+}
+
+echo '--', PHP_EOL, PHP_EOL;
+
+echo 'Reading class', PHP_EOL, PHP_EOL;
+foreach ($reader->readClass('ToCheck') as $a) {
     echo $a, PHP_EOL;
 }
