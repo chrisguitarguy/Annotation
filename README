@@ -1,0 +1,23 @@
+Annotation
+==========
+
+A little PHP library for parse PHP docblock "annotations"
+
+Example:
+
+    /**
+     * This is a docblock.
+     *
+     * @ThisIsAnAnnotation(argument=2)
+     */
+     class AClass
+     {
+        // ...
+     }
+
+Goals
+~~~~~
+
+* Self-contained
+* No nested annotation parsing
+* Annotations that are "registered" as ignored
