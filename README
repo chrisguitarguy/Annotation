@@ -1,7 +1,7 @@
 Annotation
 ==========
 
-A little PHP library for parse PHP docblock "annotations"
+A little PHP library for parsing PHP docblock "annotations"
 
 Example:
 
