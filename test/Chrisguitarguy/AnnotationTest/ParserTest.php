@@ -18,14 +18,14 @@ class ParserTest extends \PHPUnit_Framework_TestCase
     public function testSuccessfulParse()
     {
         $annotations = $this->parser->parse(
-            "/**
-             * This is a docblock just a lonesome @ sign should not cause errors
+            '/**
+             * This is a docblock just a lonesome @ sign should\\\'t cause errors
              *
-             * @Annotation(argument={one : \"here\", 'two': [-1, 1, 1.0, [-2.1], {},],})
+             * @Annotation(argument={one : "he\"re", \'tw\\\'o\': [-1, 1, 1.0, [-2.1], {},],})
              *
              * @Ident(argument=true, again=false, nope=null)
              * @param   string
-             */"
+             */'
          );
 
         $this->assertInternalType('array', $annotations);
@@ -43,10 +43,10 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $arg = $args['argument'];
         $this->assertInternalType('array', $arg);
         $this->assertArrayHasKey('one', $arg);
-        $this->assertEquals('here', $arg['one']);
-        $this->assertArrayHasKey('two', $arg);
-        $this->assertInternalType('array', $arg['two']);
-        $this->assertCount(5, $arg['two']);
+        $this->assertEquals('he"re', $arg['one']);
+        $this->assertArrayHasKey("tw'o", $arg);
+        $this->assertInternalType('array', $arg["tw'o"]);
+        $this->assertCount(5, $arg["tw'o"]);
     }
 
     protected function setUp()
