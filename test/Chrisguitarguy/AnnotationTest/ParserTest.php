@@ -49,6 +49,46 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(5, $arg["tw'o"]);
     }
 
+    /**
+     * @expectedException UnexpectedValueException
+     */
+    public function testParseWithUnclosedParen()
+    {
+        $this->parser->parse('@Annot(arg="one"');
+    }
+
+    /**
+     * @expectedException UnexpectedValueException
+     */
+    public function testParseWithUnclosedBracket()
+    {
+        $this->parser->parse('@Annot(arg=[)');
+    }
+
+    /**
+     * @expectedException UnexpectedValueException
+     */
+    public function testParseWithUnclosedBrace()
+    {
+        $this->parser->parse('@annot(arg={)');
+    }
+
+    /**
+     * @expectedException UnexpectedValueException
+     */
+    public function testParseWithMissingComma()
+    {
+        $this->parser->parse('@annot(arg =    "one" arg2="three")');
+    }
+
+    /**
+     * @expectedException UnexpectedValueException
+     */
+    public function testParseWithMissingEquals()
+    {
+        $this->parser->parse('@annot(arge "one")');
+    }
+
     protected function setUp()
     {
         $this->parser = new Parser();
