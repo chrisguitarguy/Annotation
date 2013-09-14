@@ -151,8 +151,8 @@ class TokenStream implements TokenStreamInterface
             throw new \UnexpectedValueException(sprintf(
                 'Exepcted token with the type "%s", got "%s" with value "%s"',
                 implode('|', (array)$type),
-                $this->current()->name,
-                $this->current()->value
+                $this->valid() ? $this->current()->name : 'T_ENDOFSTREAM',
+                $this->valid() ? $this->current()->value : 'null'
             ));
         }
     }
