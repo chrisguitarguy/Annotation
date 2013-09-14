@@ -89,6 +89,7 @@ class Parser implements ParserInterface
     protected function parseAnnotation(TokenStreamInterface $stream)
     {
         // disgard the @ sign
+        $stream->expect(Tokens::T_AT);
         $stream->next();
 
         // get the annotation name
