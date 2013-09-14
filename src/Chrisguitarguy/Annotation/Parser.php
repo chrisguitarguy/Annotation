@@ -311,6 +311,7 @@ class Parser implements ParserInterface
 
     protected function cleanString($str)
     {
-        return substr($str, 1, strlen($str) - 2);
+        $stripped = substr($str, 1, strlen($str) - 2);
+        return str_replace(array("\\'", '\\"'), array("'", '"'), $stripped);
     }
 }

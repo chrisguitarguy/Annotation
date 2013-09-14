@@ -35,7 +35,7 @@ class Lexer implements LexerInterface
         Tokens::T_CLOSE_BRACE   => '\}',
         Tokens::T_FLOAT         => '-?(?:[0-9]+)?\.[0-9]+',
         Tokens::T_INT           => '-?[0-9]+',
-        Tokens::T_STRING        => '"[^"]*"|\'[^\']*\'',
+        Tokens::T_STRING        => '(?<!\\\\)"(?:[^"]|(?<=\\\\)")*"|(?<!\\\\)\'(?:[^\']|(?<=\\\\)\')*\'',
         Tokens::T_WHITESPACE    => '\s+',
     );
 
