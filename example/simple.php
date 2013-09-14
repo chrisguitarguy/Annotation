@@ -5,17 +5,20 @@ require __DIR__ . '/../vendor/autoload.php';
 class Annotation
 {
     private $args;
+    private $ctx;
 
-    public function __construct(array $args)
+    public function __construct(array $args, $ctx)
     {
         $this->args = $args;
+        $this->ctx = $ctx;
     }
 
     public function __toString()
     {
         return sprintf(
-            'Annotation(%s)',
-            isset($this->args['place']) ? $this->args['place'] : 'UNKNOWN'
+            'Annotation(%s, %d)',
+            isset($this->args['place']) ? $this->args['place'] : 'UNKNOWN',
+            $this->ctx->getContext()
         );
     }
 }
