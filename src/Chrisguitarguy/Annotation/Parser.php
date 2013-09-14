@@ -167,16 +167,6 @@ class Parser implements ParserInterface
         }
     }
 
-    protected function throwUnexpected($got, $expected)
-    {
-        $expected = is_array($expected) ? $expected : array($expected);
-        throw new \UnexpectedValueException(sprintf(
-            'Expected %s got "%s" instead',
-            implode('|', $expected),
-            $got
-        ));
-    }
-
     protected function parseValue(TokenStream $stream)
     {
         // if we're here we expect a literal
