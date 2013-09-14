@@ -13,7 +13,7 @@ namespace Chrisguitarguy\Annotation;
  * Read different things doc comments and return an array of annotation objects.
  *
  * @since   0.1
- * @author  Christopher Davis <chris@pmg.co>
+ * @author  Christopher Davis <http://christopherdavis.me>
  */
 interface ReaderInterface
 {
