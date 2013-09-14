@@ -299,7 +299,7 @@ class Parser implements ParserInterface
                 break;
             case Tokens::T_IDENTIFIER:
             default:
-                $key = null;
+                $key = $token->value;
                 break;
         }
 
