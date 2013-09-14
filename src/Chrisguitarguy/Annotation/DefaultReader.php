@@ -121,7 +121,9 @@ class DefaultReader implements ReaderInterface
             );
         }
 
-        return $this->fromDocBlock($ref->getDocComment());
+        return $this->fromDocBlock($ref->getDocComment(), array(
+            'property'  => $ref,
+        ));
     }
 
     /**
@@ -134,7 +136,10 @@ class DefaultReader implements ReaderInterface
         $rv = array();
         $props = $filter ? $cls->getProperties($filter) : $cls->getProperties();
         foreach ($props as $prop) {
-            $rv[$prop->getName()] = $this->fromDocBlock($prop->getDocComment());
+            $rv[$prop->getName()] = $this->fromDocBlock($prop->getDocComment(), array(
+                'class'     => $cls,
+                'property'  => $prop,
+            ));
         }
 
         return $rv;
@@ -145,7 +150,11 @@ class DefaultReader implements ReaderInterface
      */
     public function readClass($cls)
     {
-        return $this->fromDocBlock($this->createReflectionClass($cls)->getDocComment());
+        $ref = $this->createReflectionClass($cls);
+
+        return $this->fromDocBlock($ref->getDocComment(), array(
+            'class'     => $ref,
+        ));
     }
 
     /**
@@ -163,7 +172,9 @@ class DefaultReader implements ReaderInterface
             );
         }
 
-        return $this->fromDocBlock($ref->getDocComment());
+        return $this->fromDocBlock($ref->getDocComment(), array(
+            'method'     => $ref,
+        ));
     }
 
     /**
@@ -176,7 +187,10 @@ class DefaultReader implements ReaderInterface
         $rv = array();
         $methods = $filter ? $ref->getMethods($filter) : $ref->getMethods();
         foreach ($methods as $meth) {
-            $rv[$meth->getName()] = $this->fromDocBlock($meth->getDocComment());
+            $rv[$meth->getName()] = $this->fromDocBlock($meth->getDocComment(), array(
+                'class'     => $ref,
+                'method'    => $meth,
+            ));
         }
 
         return $rv;
@@ -197,7 +211,9 @@ class DefaultReader implements ReaderInterface
             );
         }
 
-        return $this->fromDocBlock($ref->getDocComment());
+        return $this->fromDocBlock($ref->getDocComment(), array(
+            'function'  => $ref,
+        ));
     }
 
     protected function createReflectionClass($cls)
@@ -213,7 +229,23 @@ class DefaultReader implements ReaderInterface
         }
     }
 
-    protected function fromDocblock($docblock)
+    /**
+     * Use the parser to parse a docblock into annotations and create annotation
+     * objects.
+     *
+     * @since   0.1
+     * @access  protected
+     * @param   string $docblock The docblock to parse.
+     * @param   array $context This is the place from where the docblock came
+     *          This particular reader uses the keys `class`, `method`, `property`,
+     *          and `function`. One or more of them will be present. Each would
+     *          would be the appropriate Reflection(Class|Method|Property|Function)
+     *          object. The array is converted into an AnnotationContextInterface
+     *          implentation here, and, in this reader, passed as the second
+     *          argument to the constructor.
+     * @return  object[]
+     */
+    protected function fromDocblock($docblock, array $context=array())
     {
         $annotations = $this->getParser()->parse($docblock);
 
