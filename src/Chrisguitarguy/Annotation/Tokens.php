@@ -43,8 +43,10 @@ final class Tokens
     const T_WHITESPACE      = 'T_WHITESPACE';
     const T_EOF             = 'T_EOF';
 
+    // @codeCoverageIgnoreStart
     private function __construct()
     {
         // noop
     }
+    // @codeCoverageIgnoreEnd
 }
