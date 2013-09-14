@@ -90,6 +90,13 @@ class TokenStream implements TokenStreamInterface
         return isset($this->stream[$this->position]);
     }
 
+    /** Countable *************************************************************/
+
+    public function count()
+    {
+        return count($this->stream);
+    }
+
     /** TokenStreamInterface **************************************************/
 
     /**

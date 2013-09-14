@@ -15,7 +15,7 @@ namespace Chrisguitarguy\Annotation;
  * @since   0.1
  * @author  Christopher Davis <http://christopherdavis.me>
  */
-interface TokenStreamInterface extends \Iterator
+interface TokenStreamInterface extends \Iterator, \Countable
 {
     /**
      * Look at the token at the $pos
