@@ -63,7 +63,6 @@ class Lexer implements LexerInterface
     protected $input = null;
     protected $length = null;
     protected $position = null;
-    protected $did_eof = false;
     protected $stream = array();
 
     /**
@@ -87,7 +86,6 @@ class Lexer implements LexerInterface
         $this->input = $input;
         $this->length = strlen($input);
         $this->position = 0;
-        $this->did_eof = false;
         $this->stream = array();
 
         while ($this->match()) {
