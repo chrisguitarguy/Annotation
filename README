@@ -20,4 +20,4 @@ Goals
 
 * Self-contained
 * No nested annotation parsing
-* Annotations that are not "registered" as ignored
+* Annotations that are not "registered" are ignored
