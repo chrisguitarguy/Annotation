@@ -75,7 +75,8 @@ class AnnotationContextTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMethodWithoutMethod()
     {
-        (new AnnotationContext(array()))->getMethod();
+        $c = new AnnotationContext(array());
+        $c->getMethod();
     }
 
     /**
@@ -83,7 +84,8 @@ class AnnotationContextTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPropertyWithoutProperty()
     {
-        (new AnnotationContext(array()))->getProperty();
+        $c = new AnnotationContext(array());
+        $c->getProperty();
     }
 
     /**
@@ -91,7 +93,8 @@ class AnnotationContextTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFunctionWithoutFunction()
     {
-        (new AnnotationContext(array()))->getFunction();
+        $c = new AnnotationContext(array());
+        $c->getFunction();
     }
 
     /**
@@ -99,7 +102,8 @@ class AnnotationContextTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetClassWithoutClass()
     {
-        (new AnnotationContext(array()))->getClass();
+        $c = new AnnotationContext(array());
+        $c->getClass();
     }
 
     public function testGetClassWithClass()
