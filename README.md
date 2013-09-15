@@ -5,15 +5,18 @@ A little PHP library for parsing PHP docblock "annotations"
 
 Example:
 
-    /**
-     * This is a docblock.
-     *
-     * @ThisIsAnAnnotation(argument=2)
-     */
-     class AClass
-     {
-        // ...
-     }
+```php
+<?php
+/**
+ * This is a docblock.
+ *
+ * @ThisIsAnAnnotation(argument=2)
+ */
+ class AClass
+ {
+    // ...
+ }
+ ```
 
 Goals
 ~~~~~
