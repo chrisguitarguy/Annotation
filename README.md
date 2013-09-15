@@ -1,6 +1,8 @@
 Annotation
 ==========
 
+[![Build Status](https://travis-ci.org/chrisguitarguy/Annotation.png)](https://travis-ci.org/chrisguitarguy/Annotation)
+
 A little PHP library for parsing PHP docblock "annotations"
 
 Example:
