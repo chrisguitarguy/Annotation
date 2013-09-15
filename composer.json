@@ -1,6 +1,18 @@
 {
     "name": "chrisguitarguy/annotation",
     "description": "A little annotation library",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["annotation", "annotations"],
+    "homepage": "https://github.com/chrisguitarguy/Annotation",
+    "authors": [{
+        "name": "Christopher Davis",
+        "homepage": "http://christopherdavis.me"
+    }],
+    "support": {
+        "issues": "https://github.com/chrisguitarguy/Annotation/issues",
+        "source": "https://github.com/chrisguitarguy/Annotation"
+    },
     "require": {
         "php": ">=5.3.3"
     },
