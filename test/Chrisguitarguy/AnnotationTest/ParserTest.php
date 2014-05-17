@@ -24,14 +24,19 @@ class ParserTest extends \PHPUnit_Framework_TestCase
              * @Annotation(argument={one : "he\"re", \'tw\\\'o\': [-1, 1, 1.0, [-2.1], {},],})
              *
              * @Ident(argument=true, again=false, nope=null)
+             * @Annotation(one={
+             *      two: "Three",
+             *      four: 5
+             * })
              * @param   string
              */'
          );
 
         $this->assertInternalType('array', $annotations);
-        $this->assertCount(2, $annotations);
+        $this->assertCount(3, $annotations);
         $this->assertCount(2, $annotations[0]);
         $this->assertCount(2, $annotations[1]);
+        $this->assertCount(2, $annotations[2]);
         $this->assertInternalType('array', $annotations[0]);
         $this->assertInternalType('string', $annotations[0][0]);
         $this->assertInternalType('array', $annotations[0][1]);
