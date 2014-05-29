@@ -8,6 +8,6 @@
  */
 
 $loader = require __DIR__ . '/../vendor/autoload.php';
-$loader->add('Chrisguitarguy\\AnnotationTest', __DIR__);
+$loader->addPsr4('Chrisguitarguy\\AnnotationTest\\', __DIR__);
 
 require __DIR__ . '/stubs.php';
