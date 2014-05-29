@@ -113,11 +113,17 @@ class Parser implements ParserInterface
         // discard the opening paren
         $stream->next();
 
-        $arguments = array();
+        $namedArguments = $this->parseNamedArguments($stream);
+
+        return $namedArguments;
+    }
+
+    protected function parseNamedArguments(TokenStreamInterface $stream)
+    {
         while ($stream->valid()) {
             $this->consumeWhitespace($stream);
 
-            // when we reach the closing parent, bail
+            // when we reach the closing paren, bail
             if ($stream->current()->test(Tokens::T_CLOSE_PAREN)) {
                 break;
             }
