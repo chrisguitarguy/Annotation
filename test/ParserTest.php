@@ -21,7 +21,7 @@ class ParserTest extends \PHPUnit_Framework_TestCase
             '/**
              * This is a docblock just a lonesome @ sign should\\\'t cause errors
              *
-             * @Annotation(argument={one : "he\"re", \'tw\\\'o\': [-1, 1, 1.0, [-2.1], {},],})
+             * @Annotation("one", 2, 3, 5, argument={one : "he\"re", \'tw\\\'o\': [-1, 1, 1.0, [-2.1], {},],})
              *
              * @Ident(argument=true, again=false, nope=null)
              * @Annotation(one={
@@ -40,6 +40,8 @@ class ParserTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('array', $annotations[0]);
         $this->assertInternalType('string', $annotations[0][0]);
         $this->assertInternalType('array', $annotations[0][1]);
+
+        $this->assertCount(4, $annotations[0][1], 'Should have parsed four positional arguments');
 
         $args = $annotations[0][2];
 
