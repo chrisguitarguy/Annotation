@@ -122,7 +122,7 @@ class Parser implements ParserInterface
                 break;
             }
 
-            list($identifier, $value) = $this->parseArgument($stream);
+            list($identifier, $value) = $this->parseNamedArgument($stream);
             $arguments[$identifier] = $value;
 
             $this->consumeWhitespace($stream);
@@ -138,7 +138,7 @@ class Parser implements ParserInterface
         return $arguments;
     }
 
-    protected function parseArgument(TokenStreamInterface $stream)
+    protected function parseNamedArgument(TokenStreamInterface $stream)
     {
         $stream->expect(Tokens::T_IDENTIFIER);
         $identifier = $stream->current()->value;
