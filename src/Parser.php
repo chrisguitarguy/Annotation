@@ -100,12 +100,12 @@ class Parser implements ParserInterface
         $stream->next();
         $stream->expect(Tokens::T_OPEN_PAREN);
 
-        $args = $this->parseArguments($stream);
+        list($positionalArgs, $namedArgs) = $this->parseArguments($stream);
 
         $stream->expect(Tokens::T_CLOSE_PAREN);
         $stream->next();
 
-        return array($annotation_name, $args);
+        return array($annotation_name, $positionalArgs, $namedArgs);
     }
 
     protected function parseArguments(TokenStreamInterface $stream)
@@ -113,16 +113,50 @@ class Parser implements ParserInterface
         // discard the opening paren
         $stream->next();
 
+        $positionalArguments = $this->parsePositionalArguments($stream);
+        $namedArguments = $this->parseNamedArguments($stream);
+
+        return array($positionalArguments, $namedArguments);
+    }
+
+    protected function parsePositionalArguments(TokenStreamInterface $stream)
+    {
         $arguments = array();
         while ($stream->valid()) {
             $this->consumeWhitespace($stream);
 
-            // when we reach the closing parent, bail
+            // we want to parse until we reach a closing paren or an identifier
+            // An identifier signals that we've reached keyword arguments
+            if ($stream->current()->test(array(Tokens::T_CLOSE_PAREN, Tokens::T_IDENTIFIER))) {
+                break;
+            }
+
+            $arguments[] = $this->parseValue($stream);
+
+            $this->consumeWhitespace($stream);
+
+            $stream->expect(array(Tokens::T_COMMA, Tokens::T_CLOSE_PAREN));
+
+            if ($stream->current()->test(Tokens::T_COMMA)) {
+                $stream->next();
+            }
+        }
+
+        return $arguments;
+    }
+
+    protected function parseNamedArguments(TokenStreamInterface $stream)
+    {
+        $arguments = array();
+        while ($stream->valid()) {
+            $this->consumeWhitespace($stream);
+
+            // when we reach the closing paren, bail
             if ($stream->current()->test(Tokens::T_CLOSE_PAREN)) {
                 break;
             }
 
-            list($identifier, $value) = $this->parseArgument($stream);
+            list($identifier, $value) = $this->parseNamedArgument($stream);
             $arguments[$identifier] = $value;
 
             $this->consumeWhitespace($stream);
@@ -138,7 +172,7 @@ class Parser implements ParserInterface
         return $arguments;
     }
 
-    protected function parseArgument(TokenStreamInterface $stream)
+    protected function parseNamedArgument(TokenStreamInterface $stream)
     {
         $stream->expect(Tokens::T_IDENTIFIER);
         $identifier = $stream->current()->value;

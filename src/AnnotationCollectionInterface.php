@@ -57,9 +57,10 @@ interface AnnotationCollectionInterface
      * @since   0.1
      * @access  public
      * @param   string $name The annotation name (as registered with add)
-     * @param   array $arguments
+     * @param   array $positionalArguments
+     * @param   array $namedArguments
      * @param   array $context The context from which the annotation object is being created
      * @return  object|null
      */
-    public function create($name, array $arguments, array $context);
+    public function create($name, array $positionalArguments, array $namedArguments, array $context);
 }
