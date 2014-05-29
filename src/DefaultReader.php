@@ -252,9 +252,9 @@ class DefaultReader implements ReaderInterface
         $col = $this->getCollection();
         $rv = array();
         foreach ($annotations as $annot) {
-            list($name, $arguments) = $annot;
+            list($name, $positional, $named) = $annot;
 
-            if ($obj = $col->create($name, $arguments, $context)) {
+            if ($obj = $col->create($name, $positional, $named, $context)) {
                 $rv[] = $obj;
             }
         }

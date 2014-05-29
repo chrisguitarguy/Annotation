@@ -37,13 +37,14 @@ class AnnotationCollectionTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(__NAMESPACE__ . '\\TestAnnotation', $this->collection->create(
             'Annot',
             array(),
+            array(),
             array()
         ));
     }
 
     public function testCreateWithoutValidCalls()
     {
-        $this->assertNull($this->collection->create('Annot', array(), array()));
+        $this->assertNull($this->collection->create('Annot', array(), array(), array()));
     }
 
     protected function setUp()

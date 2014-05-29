@@ -146,13 +146,14 @@ class DefaultReaderTest extends \PHPUnit_Framework_TestCase
         $this->parser->expects($this->once())
             ->method('parse')
             ->will($this->returnValue(array(
-                array('annot', array('one' => 'two')),
+                array('annot', array('one', 'two'), array('one' => 'two')),
             )));
 
         $this->collection->expects($this->once())
             ->method('create')
             ->with(
                 'annot',
+                $this->contains('one'),
                 $this->arrayHasKey('one')
             )
             ->will($this->returnValue(new \stdClass()));

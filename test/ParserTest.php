@@ -34,14 +34,14 @@ class ParserTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInternalType('array', $annotations);
         $this->assertCount(3, $annotations);
-        $this->assertCount(2, $annotations[0]);
-        $this->assertCount(2, $annotations[1]);
-        $this->assertCount(2, $annotations[2]);
+        $this->assertCount(3, $annotations[0]);
+        $this->assertCount(3, $annotations[1]);
+        $this->assertCount(3, $annotations[2]);
         $this->assertInternalType('array', $annotations[0]);
         $this->assertInternalType('string', $annotations[0][0]);
         $this->assertInternalType('array', $annotations[0][1]);
 
-        $args = $annotations[0][1];
+        $args = $annotations[0][2];
 
         $this->assertArrayHasKey('argument', $args);
 

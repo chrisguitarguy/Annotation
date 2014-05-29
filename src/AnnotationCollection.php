@@ -73,10 +73,10 @@ class AnnotationCollection implements AnnotationCollectionInterface
     /**
      * {@inheritdoc}
      */
-    public function create($name, array $arguments, array $context)
+    public function create($name, array $positionalArguments, array $namedArguments, array $context)
     {
         if ($this->has($name)) {
-            return new $this->registry[$name]($arguments, new AnnotationContext($context));
+            return new $this->registry[$name]($positionalArguments, $namedArguments, new AnnotationContext($context));
         }
 
         return null;
